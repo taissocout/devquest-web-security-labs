@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+    name="description"
+    content="DevQuest Web Security Labs - 20 practical web security labs with vulnerable and fixed versions for AppSec, DevSecOps and offensive security learning."
+  />
+  <meta
+    name="referrer"
+    content="strict-origin-when-cross-origin"
+  />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data:;
+      font-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    "
+  />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>DevQuest Web Security Labs</title>
+
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-soft: #0d1728;
+      --card: #111c30;
+      --card-hover: #15233b;
+      --border: #243553;
+      --text: #ecf4ff;
+      --muted: #a7bbd8;
+      --primary: #6fc8ff;
+      --primary-strong: #9edcff;
+      --accent: #7c5cff;
+      --tag-bg: #1a2945;
+      --success: #8ce3b0;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(124, 92, 255, 0.10), transparent 22%),
+        radial-gradient(circle at top left, rgba(111, 200, 255, 0.12), transparent 25%),
+        linear-gradient(180deg, #07101d 0%, #0a1423 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--primary-strong);
+      text-decoration: underline;
+    }
+
+    button,
+    a {
+      transition: 0.2s ease;
+    }
+
+    .wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(17, 28, 48, 0.92), rgba(10, 20, 35, 0.95));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary-strong);
+      background: rgba(111, 200, 255, 0.08);
+      border: 1px solid rgba(111, 200, 255, 0.18);
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #132038;
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: #1a2b47;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1570ef, #5b8cff);
+      border-color: transparent;
+      color: white;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: linear-gradient(135deg, #1b79fa, #6a95ff);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .meta-card {
+      background: rgba(17, 28, 48, 0.72);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+
+    .meta-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      margin: 34px 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .section-subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .notice {
+      background: rgba(140, 227, 176, 0.08);
+      border: 1px solid rgba(140, 227, 176, 0.22);
+      color: #d7ffe4;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(17, 28, 48, 0.98), rgba(14, 23, 39, 0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-height: 190px;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover,
+    .card:focus-within {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      border-color: #35507d;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: #9fc1ff;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .lab-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid #294266;
+      background: #13233a;
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .lab-link:hover,
+    .lab-link:focus-visible {
+      background: #19304d;
+      color: #b6e3ff;
+      text-decoration: none;
+    }
+
+    .footer {
+      margin-top: 42px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer strong {
+      color: var(--text);
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #101b2d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .socials a:hover,
+    .socials a:focus-visible {
+      background: #17263d;
+      text-decoration: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 22px;
+      }
+
+      .card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow">DevSecOps • AppSec • Offensive Security</div>
+
+      <h1 id="page-title">DevQuest Web Security Labs</h1>
+
+      <p>
+        A practical collection of 20 hands-on web security labs with vulnerable and fixed versions,
+        built to support learning in web security, secure development, AppSec validation, and
+        DevSecOps practices.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#labs">Explore Labs</a>
+        <a
+          class="btn"
+          href="https://github.com/taissocout"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="Open GitHub profile of taissocout"
+        >
+          GitHub
+        </a>
+        <a
+          class="btn"
+          href="https://www.linkedin.com/in/taissocout"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="Open LinkedIn profile of taissocout"
+        >
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="meta-grid" aria-label="Project summary">
+        <div class="meta-card">
+          <strong>20 Labs</strong>
+          <span>Practical security scenarios with vulnerable and remediated versions.</span>
+        </div>
+        <div class="meta-card">
+          <strong>Hands-on Learning</strong>
+          <span>Focused on real security concepts for developers and security practitioners.</span>
+        </div>
+        <div class="meta-card">
+          <strong>Portfolio Ready</strong>
+          <span>Built to showcase security thinking, secure coding, and lab-based practice.</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="labs-title" id="labs">
+      <h2 class="section-title" id="labs-title">Security Labs Index</h2>
+      <p class="section-subtitle">
+        Each lab includes a vulnerable version for study and a fixed version demonstrating a safer implementation.
+      </p>
+
+      <div class="notice" role="note" aria-label="Educational use notice">
+        These labs are intended for educational and defensive security purposes only, such as secure coding practice,
+        AppSec learning, and vulnerability awareness.
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="tag">01</div>
+          <h2>XSS DOM</h2>
+          <p>Client-side DOM-based cross-site scripting lab.</p>
+          <div class="links">
+            <a class="lab-link" href="./01-devquest-security-lab-xss-dom/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./01-devquest-security-lab-xss-dom/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">02</div>
+          <h2>innerHTML Injection</h2>
+          <p>Unsafe HTML rendering and safer output handling.</p>
+          <div class="links">
+            <a class="lab-link" href="./02-devquest-security-lab-innerhtml/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./02-devquest-security-lab-innerhtml/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">03</div>
+          <h2>Weak Form Validation</h2>
+          <p>Insufficient validation logic and stronger validation practices.</p>
+          <div class="links">
+            <a class="lab-link" href="./03-devquest-security-lab-form-validation/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./03-devquest-security-lab-form-validation/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">04</div>
+          <h2>Insecure localStorage</h2>
+          <p>Risks of unsafe browser-side data storage.</p>
+          <div class="links">
+            <a class="lab-link" href="./04-devquest-security-lab-localstorage/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./04-devquest-security-lab-localstorage/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">05</div>
+          <h2>URL Parameter Abuse</h2>
+          <p>Improper trust in URL-controlled input and safer handling.</p>
+          <div class="links">
+            <a class="lab-link" href="./05-devquest-security-lab-url-params/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./05-devquest-security-lab-url-params/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">06</div>
+          <h2>Open Redirect</h2>
+          <p>Unsafe redirection flows and validation-based mitigation.</p>
+          <div class="links">
+            <a class="lab-link" href="./06-devquest-security-lab-open-redirect/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./06-devquest-security-lab-open-redirect/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">07</div>
+          <h2>Insecure Login Mock</h2>
+          <p>Authentication anti-patterns in front-end mock flows.</p>
+          <div class="links">
+            <a class="lab-link" href="./07-devquest-security-lab-login-mock/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./07-devquest-security-lab-login-mock/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">08</div>
+          <h2>Sensitive Data Exposure</h2>
+          <p>Unsafe exposure of sensitive information in client-side contexts.</p>
+          <div class="links">
+            <a class="lab-link" href="./08-devquest-security-lab-sensitive-data/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./08-devquest-security-lab-sensitive-data/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">09</div>
+          <h2>Insecure Token Storage</h2>
+          <p>Token handling risks and safer storage considerations.</p>
+          <div class="links">
+            <a class="lab-link" href="./09-devquest-security-lab-token-storage/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./09-devquest-security-lab-token-storage/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">10</div>
+          <h2>Missing Cookie Flags</h2>
+          <p>Cookie hardening basics like Secure, HttpOnly, and SameSite.</p>
+          <div class="links">
+            <a class="lab-link" href="./10-devquest-security-lab-cookie-flags/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./10-devquest-security-lab-cookie-flags/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">11</div>
+          <h2>Weak CSP</h2>
+          <p>Content Security Policy weaknesses and stronger restrictions.</p>
+          <div class="links">
+            <a class="lab-link" href="./11-devquest-security-lab-csp-bypass/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./11-devquest-security-lab-csp-bypass/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">12</div>
+          <h2>Clickjacking</h2>
+          <p>UI redressing risks and anti-framing defenses.</p>
+          <div class="links">
+            <a class="lab-link" href="./12-devquest-security-lab-clickjacking/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./12-devquest-security-lab-clickjacking/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">13</div>
+          <h2>CORS Misconfiguration</h2>
+          <p>Cross-origin policy mistakes and safer origin restrictions.</p>
+          <div class="links">
+            <a class="lab-link" href="./13-devquest-security-lab-cors/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./13-devquest-security-lab-cors/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">14</div>
+          <h2>Missing Security Headers</h2>
+          <p>Browser hardening via foundational response headers.</p>
+          <div class="links">
+            <a class="lab-link" href="./14-devquest-security-lab-headers/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./14-devquest-security-lab-headers/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">15</div>
+          <h2>Weak API Authorization</h2>
+          <p>Broken authorization patterns and secure access control thinking.</p>
+          <div class="links">
+            <a class="lab-link" href="./15-devquest-security-lab-api-auth/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./15-devquest-security-lab-api-auth/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">16</div>
+          <h2>Mass Assignment</h2>
+          <p>Unsafe object binding and property control issues.</p>
+          <div class="links">
+            <a class="lab-link" href="./16-devquest-security-lab-mass-assignment/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./16-devquest-security-lab-mass-assignment/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">17</div>
+          <h2>IDOR</h2>
+          <p>Insecure direct object reference and access validation.</p>
+          <div class="links">
+            <a class="lab-link" href="./17-devquest-security-lab-idor/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./17-devquest-security-lab-idor/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">18</div>
+          <h2>Stored XSS</h2>
+          <p>Persistent XSS behavior and safer input/output handling.</p>
+          <div class="links">
+            <a class="lab-link" href="./18-devquest-security-lab-xss-stored/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./18-devquest-security-lab-xss-stored/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">19</div>
+          <h2>Prototype Pollution</h2>
+          <p>JavaScript object pollution impact and defensive coding patterns.</p>
+          <div class="links">
+            <a class="lab-link" href="./19-devquest-security-lab-prototype-pollution/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./19-devquest-security-lab-prototype-pollution/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tag">20</div>
+          <h2>Security Dashboard</h2>
+          <p>A summary lab interface for visibility and secure UI considerations.</p>
+          <div class="links">
+            <a class="lab-link" href="./20-devquest-security-lab-dashboard/vulnerable/index.html">Vulnerable</a>
+            <a class="lab-link" href="./20-devquest-security-lab-dashboard/fixed/index.html">Fixed</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>Created by Taisso Coutinho</strong>
+      <p>
+        Web security portfolio focused on secure development, vulnerability awareness, and hands-on DevSecOps learning.
+      </p>
+
+      <div class="socials" aria-label="Author social links">
+        <a
+          href="https://github.com/taissocout"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="GitHub profile of taissocout"
+        >
+          GitHub / taissocout
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/taissocout"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="LinkedIn profile of taissocout"
+        >
+          LinkedIn / taissocout
+        </a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
