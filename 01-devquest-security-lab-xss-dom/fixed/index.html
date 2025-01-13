@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ✅ CSP básica bloqueando scripts inline externos -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com">
+  <title>Lab 01 — XSS DOM ✅ CORRIGIDO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="noise"></div>
+
+  <header class="header">
+    <div class="badge fixed">✅ VERSÃO CORRIGIDA</div>
+    <h1 class="title">XSS<span class="accent-safe">::</span>DOM</h1>
+    <p class="subtitle">// Versão segura com sanitização correta</p>
+  </header>
+
+  <main class="terminal-window">
+    <div class="terminal-bar">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      <span class="terminal-title">lab01-xss-dom-fixed — bash</span>
+    </div>
+    <div class="terminal-body">
+      <p class="comment">// ✅ CORRIGIDO: o input é sanitizado com textContent antes de ser exibido</p>
+
+      <div class="input-group">
+        <label class="label">$ Digite seu nome:</label>
+        <div class="input-row">
+          <input type="text" id="nomeInput" class="terminal-input"
+                 placeholder="Tente injetar HTML aqui — não vai funcionar" autocomplete="off">
+          <button class="btn-exec" onclick="mostrarSaudacao()">EXEC</button>
+        </div>
+      </div>
+
+      <div class="output-block">
+        <span class="prompt">output@lab:~$</span>
+        <div id="output" class="output-text">_</div>
+      </div>
+
+      <div class="url-display">
+        <span class="label-url">URL atual:</span>
+        <code id="urlAtual" class="url-code"></code>
+      </div>
+    </div>
+  </main>
+
+  <div class="info-panel">
+    <div class="info-item safe">
+      <span class="info-icon">🛡</span>
+      <div>
+        <strong>Correção aplicada</strong>
+        <p>O valor do input é inserido via <code>textContent</code> — que escapa HTML automaticamente.</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">▶</span>
+      <div>
+        <strong>Por que funciona</strong>
+        <p><code>textContent</code> trata tudo como texto puro. Qualquer tag HTML é exibida como string literal, nunca executada.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
