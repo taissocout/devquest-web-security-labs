@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 01 — XSS DOM ⚠️ VULNERÁVEL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="noise"></div>
+
+  <header class="header">
+    <div class="badge vuln">⚠ VERSÃO VULNERÁVEL</div>
+    <h1 class="title">XSS<span class="accent">::</span>DOM</h1>
+    <p class="subtitle">// DOM-based Cross-Site Scripting</p>
+  </header>
+
+  <main class="terminal-window">
+    <div class="terminal-bar">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      <span class="terminal-title">lab01-xss-dom — bash</span>
+    </div>
+    <div class="terminal-body">
+      <p class="comment">// A URL abaixo reflete o parâmetro ?name= diretamente no DOM</p>
+      <p class="comment">// Teste: adicione ?name=&lt;img src=x onerror=alert('XSS')&gt; na URL</p>
+
+      <div class="input-group">
+        <label class="label">$ Digite seu nome:</label>
+        <div class="input-row">
+          <input type="text" id="nomeInput" class="terminal-input"
+                 placeholder="ex: João ou &lt;script&gt;alert(1)&lt;/script&gt;" autocomplete="off">
+          <button class="btn-exec" onclick="mostrarSaudacao()">EXEC</button>
+        </div>
+      </div>
+
+      <div class="output-block">
+        <span class="prompt">output@lab:~$</span>
+        <div id="output" class="output-text">_</div>
+      </div>
+
+      <div class="url-display">
+        <span class="label-url">URL atual:</span>
+        <code id="urlAtual" class="url-code"></code>
+      </div>
+    </div>
+  </main>
+
+  <div class="info-panel">
+    <div class="info-item danger">
+      <span class="info-icon">☠</span>
+      <div>
+        <strong>Vulnerabilidade ativa</strong>
+        <p>O valor do input é inserido via <code>innerHTML</code> sem nenhuma sanitização.</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">▶</span>
+      <div>
+        <strong>Como explorar</strong>
+        <p>Cole no campo: <code>&lt;img src=x onerror=alert('XSS DISPARADO!')&gt;</code></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
