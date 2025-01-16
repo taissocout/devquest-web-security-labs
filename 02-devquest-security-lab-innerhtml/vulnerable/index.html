@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 02 — innerHTML Inseguro ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <span class="label-vuln">⚠ VULNERABLE</span>
+    <span class="lab-ref">LAB-02 · innerHTML XSS</span>
+    <span class="date-ref">2025.01.13</span>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-num">02</div>
+      <div class="sidebar-title">inner<br>HTML</div>
+      <div class="sidebar-sub">Inseguro</div>
+      <div class="vuln-chip">XSS</div>
+    </aside>
+
+    <main class="content">
+      <div class="section-tag">// BOARD DE COMENTÁRIOS — VULNERÁVEL</div>
+
+      <div class="post-form">
+        <div class="form-header">
+          <span class="form-title">Novo comentário</span>
+          <span class="hint">💡 Tente: &lt;b&gt;negrito&lt;/b&gt; ou &lt;img src=x onerror=alert(1)&gt;</span>
+        </div>
+        <input type="text" id="autorInput" class="field" placeholder="Seu nome">
+        <textarea id="msgInput" class="field textarea"
+                  placeholder="Mensagem (HTML aceito aqui — propositalmente inseguro)"></textarea>
+        <button class="btn-post" onclick="postar()">POSTAR →</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div id="comentarios" class="comments-list">
+        <div class="empty-state">Nenhum comentário ainda. Seja o primeiro!</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
