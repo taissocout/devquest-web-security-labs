@@ -74,3 +74,5 @@ This simulated assessment confirmed the presence of **DOM-Based Cross-Site Scrip
 This report belongs to a controlled educational and portfolio project. It does **not** represent a claim of assessment against a production environment or third-party target.
 
 ### Review Note\nInitial wording refined after separating root cause from exploit outcome.
+
+## Post-Review\nRevised technical wording after peer review of the initial draft.
