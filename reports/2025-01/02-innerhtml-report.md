@@ -74,3 +74,5 @@ This simulated assessment confirmed the presence of **Unsafe HTML Rendering via 
 This report belongs to a controlled educational and portfolio project. It does **not** represent a claim of assessment against a production environment or third-party target.
 
 ### Review Note\nClarified that unsafe HTML rendering was the primary weakness.
+
+## Clarification\nRoot cause separated from rendering impact after second review.
