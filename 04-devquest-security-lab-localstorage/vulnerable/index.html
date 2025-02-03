@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 04 — localStorage Inseguro ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <div class="wrapper">
+    <header class="site-header">
+      <div class="logo">VAULT<span>APP</span></div>
+      <div class="header-right">
+        <span class="status-dot"></span>
+        <span class="status-text" id="statusText">desconectado</span>
+      </div>
+    </header>
+
+    <div class="alert-bar">
+      ⚠ LABORATÓRIO VULNERÁVEL — tokens e dados sensíveis gravados em localStorage
+    </div>
+
+    <main class="panels">
+      <!-- Painel de Login -->
+      <div class="panel" id="panelLogin">
+        <div class="panel-header">
+          <span class="panel-icon">🔑</span>
+          <span class="panel-title">Login</span>
+        </div>
+        <div class="panel-body">
+          <input type="text" id="loginUser" class="inp" placeholder="usuário" value="admin">
+          <input type="password" id="loginPass" class="inp" placeholder="senha" value="senha123">
+          <button class="btn-primary" onclick="fazerLogin()">ENTRAR</button>
+        </div>
+      </div>
+
+      <!-- Painel de Dados Armazenados -->
+      <div class="panel" id="panelStorage">
+        <div class="panel-header">
+          <span class="panel-icon">💾</span>
+          <span class="panel-title">localStorage atual</span>
+          <button class="btn-small" onclick="atualizarStorage()">↻ atualizar</button>
+        </div>
+        <div class="panel-body">
+          <div id="storageView" class="storage-view">
+            <span class="empty-msg">Nenhum dado armazenado ainda</span>
+          </div>
+          <button class="btn-danger" onclick="roubarDados()">☠ SIMULAR ATAQUE XSS</button>
+        </div>
+      </div>
+
+      <!-- Painel do usuário logado -->
+      <div class="panel panel-hidden" id="panelUser">
+        <div class="panel-header">
+          <span class="panel-icon">👤</span>
+          <span class="panel-title">Área logada</span>
+          <button class="btn-small" onclick="fazerLogout()">sair</button>
+        </div>
+        <div class="panel-body">
+          <div class="user-info" id="userInfo"></div>
+          <p class="vuln-note">
+            ⚠ Todos os dados acima estão visíveis via <code>localStorage</code>.<br>
+            Abra o DevTools → Application → Local Storage para confirmar.
+          </p>
+        </div>
+      </div>
+
+      <!-- Log de ataque -->
+      <div class="panel panel-full" id="panelLog" style="display:none">
+        <div class="panel-header">
+          <span class="panel-icon">☠</span>
+          <span class="panel-title">Resultado do ataque XSS</span>
+        </div>
+        <div class="panel-body">
+          <div id="attackLog" class="attack-log"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
