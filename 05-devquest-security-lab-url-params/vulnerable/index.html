@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 05 — URL Params ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">SEC<span>PANEL</span></div>
+    <div class="nav-meta">
+      <span class="nav-label">role:</span>
+      <span class="nav-value" id="navRole">—</span>
+      <span class="nav-sep">|</span>
+      <span class="nav-label">user:</span>
+      <span class="nav-value" id="navUser">—</span>
+    </div>
+    <div class="vuln-badge">⚠ VULN</div>
+  </nav>
+
+  <div class="page">
+    <!-- Tela de acesso negado (padrão) -->
+    <div class="view" id="viewDenied">
+      <div class="denied-box">
+        <div class="denied-icon">🚫</div>
+        <h2>Acesso Negado</h2>
+        <p>Você está logado como <strong id="deniedUser">usuário</strong> (<strong id="deniedRole">user</strong>).</p>
+        <p class="hint">💡 Tente adicionar <code>?role=admin</code> na URL para escalar privilégios.</p>
+        <div class="url-editor">
+          <span class="url-label">URL:</span>
+          <input type="text" id="urlInput" class="url-inp" readonly>
+          <button class="btn-go" onclick="navigateTo()">IR</button>
+        </div>
+        <div class="quick-links">
+          <button class="qbtn" onclick="setParam('role','admin')">?role=admin</button>
+          <button class="qbtn" onclick="setParam('admin','true')">?admin=true</button>
+          <button class="qbtn" onclick="setParam('privilege','superuser')">?privilege=superuser</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel admin (desbloqueado via param) -->
+    <div class="view view-hidden" id="viewAdmin">
+      <div class="admin-header">
+        <div class="admin-crown">👑</div>
+        <div>
+          <h1 class="admin-title">Painel Administrativo</h1>
+          <p class="admin-sub">Acesso concedido via parâmetro de URL</p>
+        </div>
+        <div class="exploit-tag">PRIVILEGE ESCALATION</div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="stat-card">
+          <div class="stat-n">2.847</div>
+          <div class="stat-l">Usuários</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">R$ 184.320</div>
+          <div class="stat-l">Receita</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">47</div>
+          <div class="stat-l">Pedidos hoje</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="stat-n">⚠</div>
+          <div class="stat-l">Você não deveria estar aqui</div>
+        </div>
+      </div>
+
+      <div class="exploit-info">
+        <div class="exploit-title">// Como aconteceu:</div>
+        <code id="exploitCode"></code>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
