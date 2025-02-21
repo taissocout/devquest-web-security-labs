@@ -36,3 +36,5 @@ This document summarizes the simulated security assessment work performed during
 
 ## Reporting Notes
 All findings and conclusions in this summary belong to a simulated portfolio and educational project.
+
+## Reviewer Adjustment\nTerminology normalized after comparing validation, storage, and parameter trust issues.
