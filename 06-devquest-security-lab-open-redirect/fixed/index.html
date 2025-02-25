@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 06 — Open Redirect ✅ FIXED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <main class="shell">
+    <header class="hero">
+      <div class="pill safe">✅ FIXED</div>
+      <h1>Open Redirect</h1>
+      <p>Redirecionamento seguro com allowlist e fallback interno.</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Login concluído</span>
+        <span class="panel-chip">LAB-06</span>
+      </div>
+
+      <div class="panel-body">
+        <p class="lead">
+          Apenas caminhos internos autorizados podem ser usados como destino.
+        </p>
+
+        <div class="field">
+          <label>Próximo destino detectado</label>
+          <input id="nextInput" type="text" readonly>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn-primary" onclick="continuar()">Continuar</button>
+          <button class="btn-secondary" onclick="usarPayloadMalicioso()">Testar payload externo</button>
+          <button class="btn-secondary" onclick="usarDestinoInterno()">Usar destino interno</button>
+        </div>
+
+        <div class="note success">
+          <strong>Correção:</strong>
+          a aplicação aceita apenas rotas internas pré-definidas e faz
+          fallback para <code>/painel</code> quando o valor for inválido.
+        </div>
+
+        <div class="log-box">
+          <div class="log-title">// Decisão de segurança</div>
+          <code id="decisionLog"></code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
