@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 06 — Open Redirect ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <main class="shell">
+    <header class="hero">
+      <div class="pill vuln">⚠ VULNERABLE</div>
+      <h1>Open Redirect</h1>
+      <p>Redirecionamento confiando em <code>?next=</code> sem validação.</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Login concluído</span>
+        <span class="panel-chip">LAB-06</span>
+      </div>
+
+      <div class="panel-body">
+        <p class="lead">
+          Após o login, o sistema envia o usuário para a URL presente em
+          <code>?next=</code>.
+        </p>
+
+        <div class="field">
+          <label>Próximo destino detectado</label>
+          <input id="nextInput" type="text" readonly>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn-primary" onclick="continuar()">Continuar</button>
+          <button class="btn-secondary" onclick="usarPayloadMalicioso()">Payload malicioso</button>
+          <button class="btn-secondary" onclick="usarDestinoInterno()">Destino interno</button>
+        </div>
+
+        <div class="note danger">
+          <strong>Risco:</strong>
+          Um atacante pode enviar um link legítimo do domínio confiável,
+          mas redirecionar a vítima para um domínio externo malicioso.
+        </div>
+
+        <div class="log-box">
+          <div class="log-title">// Exemplo de exploração</div>
+          <code id="payloadPreview"></code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
