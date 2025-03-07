@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 07 — Login Mock Inseguro ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Login Mock Inseguro</h1>
+      <p class="subtitle">Credenciais e regras de autorização expostas no front-end.</p>
+
+      <div class="field">
+        <label>Usuário</label>
+        <input id="user" type="text" placeholder="admin">
+      </div>
+
+      <div class="field">
+        <label>Senha</label>
+        <input id="pass" type="password" placeholder="admin123">
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="login()">Entrar</button>
+        <button class="btn-secondary" onclick="showHints()">Ver dicas</button>
+      </div>
+
+      <div id="result" class="result hidden"></div>
+
+      <div class="hint-box">
+        <div class="hint-title">// Painel de observação</div>
+        <code id="devPanel">Aguardando interação...</code>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
