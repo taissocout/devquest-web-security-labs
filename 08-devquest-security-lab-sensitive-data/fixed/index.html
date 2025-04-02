@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 — Sensitive Data Exposure ✅ FIXED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="status safe">✅ FIXED</div>
+      <h1>Sensitive Data Exposure</h1>
+      <p>Somente dados necessários são enviados ao cliente.</p>
+    </header>
+
+    <section class="console-card">
+      <div class="console-head">
+        <span>audit-view</span>
+        <span>LAB-08</span>
+      </div>
+
+      <div class="console-body">
+        <button class="btn" onclick="loadConfig()">Carregar configuração</button>
+        <button class="btn" onclick="loadCustomer()">Carregar cliente</button>
+
+        <div class="block">
+          <div class="block-title">// public config</div>
+          <pre id="configOut">Aguardando...</pre>
+        </div>
+
+        <div class="block">
+          <div class="block-title">// customer payload</div>
+          <pre id="customerOut">Aguardando...</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
