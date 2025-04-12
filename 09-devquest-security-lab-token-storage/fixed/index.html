@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 09 — Token Storage ✅ FIXED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div>
+        <div class="badge safe">✅ FIXED</div>
+        <h1>Token Storage Seguro</h1>
+        <p>Sessão controlada pelo servidor; token não fica acessível ao JavaScript.</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Autenticação</h2>
+        <p>Fluxo seguro simulado com sessão de servidor.</p>
+        <button class="btn-primary" onclick="login()">Criar sessão</button>
+        <button class="btn-secondary" onclick="logout()">Encerrar</button>
+      </div>
+
+      <div class="card">
+        <h2>Armazenamento</h2>
+        <pre id="storageOut">Vazio</pre>
+      </div>
+
+      <div class="card card-wide">
+        <h2>Simulação de ataque XSS</h2>
+        <p>O front-end não consegue ler o cookie HttpOnly real.</p>
+        <button class="btn-danger" onclick="simulateXss()">Tentar ler sessão</button>
+        <pre id="xssOut">Aguardando...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
