@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 — Cookie Flags Ausentes ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="terminal">
+    <header class="hero">
+      <div class="chip vuln">⚠ VULNERABLE</div>
+      <h1>Cookie Flags Ausentes</h1>
+      <p>Cookie de sessão criado sem <code>Secure</code> e sem <code>SameSite</code>.</p>
+    </header>
+
+    <section class="card">
+      <div class="actions">
+        <button onclick="setBadCookie()">Criar cookie inseguro</button>
+        <button onclick="readCookie()">Ler document.cookie</button>
+        <button onclick="clearCookie()">Limpar</button>
+      </div>
+
+      <div class="box">
+        <div class="box-title">// cookie string</div>
+        <pre id="cookieOut">Aguardando...</pre>
+      </div>
+
+      <div class="box">
+        <div class="box-title">// análise</div>
+        <pre id="analysisOut">Aguardando...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
