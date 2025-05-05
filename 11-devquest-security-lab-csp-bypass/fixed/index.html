@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    CORRIGIDO:
+    - sem unsafe-inline em script-src
+    - CSP mais restritiva
+    - combinada com render seguro no JS
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+
+  <title>Lab 11 — CSP Segura ✅</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="page">
+    <header class="hero">
+      <div class="tag safe">✅ FIXED</div>
+      <h1>CSP Segura</h1>
+      <p>Sem <code>'unsafe-inline'</code> e com renderização segura.</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span class="title">Render de comentário</span>
+        <span class="chip">LAB-11</span>
+      </div>
+
+      <div class="panel-body">
+        <label class="label" for="payloadInput">Mensagem</label>
+        <textarea id="payloadInput" class="field area"
+          placeholder="Tente injetar HTML aqui"></textarea>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="renderComment()">Renderizar</button>
+          <button class="btn-secondary" onclick="loadPayload()">Payload demo</button>
+        </div>
+
+        <div class="hint">
+          <strong>Correção:</strong> o conteúdo é exibido com
+          <code>textContent</code>, e a CSP não permite script inline.
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">// output</div>
+          <div id="output" class="output"></div>
+        </div>
+
+        <div class="info-box">
+          <div class="output-title">// CSP atual</div>
+          <code>script-src 'self'; frame-ancestors 'none'; object-src 'none'</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
