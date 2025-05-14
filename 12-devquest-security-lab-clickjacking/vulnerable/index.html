@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 12 — Clickjacking ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Clickjacking</h1>
+      <p>Página sem proteção contra carregamento em frame.</p>
+    </header>
+
+    <section class="card">
+      <div class="card-head">
+        <span>Painel bancário demo</span>
+        <span>LAB-12</span>
+      </div>
+
+      <div class="card-body">
+        <p class="lead">
+          Imagine esta página embutida em um <code>iframe</code> invisível com um
+          botão falso por cima.
+        </p>
+
+        <div class="account-box">
+          <div class="balance-label">Saldo</div>
+          <div class="balance">R$ 48.920,00</div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-danger" onclick="transferMoney()">Transferir R$ 10.000</button>
+          <button class="btn-secondary" onclick="showAttack()">Ver cenário de ataque</button>
+        </div>
+
+        <div id="result" class="result hidden"></div>
+
+        <div class="mock-frame-box">
+          <div class="frame-title">// Exemplo conceitual</div>
+          <div class="frame-demo">
+            <div class="fake-layer">🎁 Clique aqui para ganhar prêmio</div>
+            <div class="real-layer">Botão real sensível por baixo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
