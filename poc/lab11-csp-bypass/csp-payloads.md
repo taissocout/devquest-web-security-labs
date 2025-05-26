@@ -10,3 +10,5 @@ Record simulated payloads tested against weak CSP configuration.
 
 ## Observation
 Policy allowed inline execution due to missing strict directives.
+
+## Revision\nPayload notes revised after comparing inline execution with stricter browser behavior.
