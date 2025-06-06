@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 13 — CORS Misconfig ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>CORS Misconfiguration</h1>
+      <p>API permitindo origem ampla demais com dados sensíveis.</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Requisição simulada</h2>
+        <label class="label">Origin</label>
+        <input id="originInput" class="field" value="https://evil.example">
+        <div class="actions">
+          <button class="btn-primary" onclick="simulateCors()">Enviar</button>
+          <button class="btn-secondary" onclick="loadTrusted()">Trusted origin</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Resposta</h2>
+        <pre id="responseOut">Aguardando...</pre>
+      </div>
+
+      <div class="card wide">
+        <h2>Leitura do atacante</h2>
+        <pre id="attackOut">Aguardando...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
