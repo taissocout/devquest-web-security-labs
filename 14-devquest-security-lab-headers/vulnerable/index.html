@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 14 — Security Headers Ausentes ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Security Headers Ausentes</h1>
+      <p>Faltam cabeçalhos básicos de endurecimento da aplicação.</p>
+    </header>
+
+    <section class="audit-card">
+      <div class="audit-head">
+        <span>Header Audit</span>
+        <span>LAB-14</span>
+      </div>
+
+      <div class="audit-body">
+        <button class="btn-primary" onclick="runAudit()">Executar auditoria</button>
+
+        <div id="list" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
