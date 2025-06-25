@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 15 — API Auth Segura ✅</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="tag safe">✅ FIXED</div>
+      <h1>API Auth Segura</h1>
+      <p>Autorização baseada em sessão/token validado no servidor.</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span>Request Builder</span>
+        <span>LAB-15</span>
+      </div>
+
+      <div class="panel-body">
+        <label class="label">Claim recebida do servidor</label>
+        <input id="roleInput" class="field" value="user" readonly>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="callApi()">Chamar API</button>
+          <button class="btn-secondary" onclick="simulateServerAdmin()">Simular sessão admin válida</button>
+        </div>
+
+        <div class="box">
+          <div class="box-title">// response</div>
+          <pre id="responseOut">Aguardando...</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
