@@ -3,3 +3,5 @@
 ## Principle
 Authorization must come from server-validated identity and trusted claims,
 never from client-provided headers or parameters.
+
+## Revision\nAdded comparison between client hints versus authoritative server identity.
