@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 17 — IDOR ✅</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="tag safe">✅ FIXED</div>
+      <h1>IDOR Mitigado</h1>
+      <p>O recurso só é retornado se pertencer ao usuário autenticado.</p>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span>Order Viewer</span>
+        <span>LAB-17</span>
+      </div>
+
+      <div class="panel-body">
+        <div class="inline">
+          <label class="label">Order ID</label>
+          <input id="orderIdInput" class="field" value="5001">
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="fetchOrder()">Buscar pedido</button>
+          <button class="btn-secondary" onclick="switchToOtherUser()">Trocar para pedido de outro usuário</button>
+        </div>
+
+        <pre id="output">Aguardando...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
