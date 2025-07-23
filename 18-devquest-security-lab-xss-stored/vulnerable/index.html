@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 18 — Stored XSS ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Stored XSS</h1>
+      <p>Conteúdo persistido e renderizado depois para outros usuários.</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Novo comentário</h2>
+        <input id="authorInput" class="field" placeholder="Autor">
+        <textarea id="messageInput" class="field area" placeholder="Mensagem"></textarea>
+        <div class="actions">
+          <button class="btn-primary" onclick="saveComment()">Salvar</button>
+          <button class="btn-secondary" onclick="loadPayload()">Payload demo</button>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <h2>Feed</h2>
+        <div id="feed" class="feed"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
