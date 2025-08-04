@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 19 — Prototype Pollution ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Prototype Pollution</h1>
+      <p>Merge inseguro permitindo propriedades especiais.</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Payload JSON</h2>
+        <textarea id="payloadInput" class="field area"></textarea>
+        <div class="actions">
+          <button class="btn-primary" onclick="applyPayload()">Aplicar merge</button>
+          <button class="btn-secondary" onclick="loadPayload()">Payload demo</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Estado do app</h2>
+        <pre id="stateOut"></pre>
+      </div>
+
+      <div class="card wide">
+        <h2>Checagem de efeito</h2>
+        <pre id="resultOut"></pre>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
