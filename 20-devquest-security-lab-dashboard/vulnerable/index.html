@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 20 — Security Dashboard ⚠️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="dashboard">
+    <header class="hero">
+      <div class="tag vuln">⚠ VULNERABLE</div>
+      <h1>Security Posture Dashboard</h1>
+      <p>Resumo didático de postura fraca, com múltiplos alertas ativos.</p>
+    </header>
+
+    <section class="grid">
+      <div class="card metric">
+        <div class="metric-label">Risco geral</div>
+        <div class="metric-value danger">CRÍTICO</div>
+      </div>
+
+      <div class="card metric">
+        <div class="metric-label">Labs vulneráveis</div>
+        <div class="metric-value">20/20</div>
+      </div>
+
+      <div class="card metric">
+        <div class="metric-label">Controles fortes</div>
+        <div class="metric-value">0</div>
+      </div>
+
+      <div class="card wide">
+        <h2>Achados prioritários</h2>
+        <div id="findings" class="list"></div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
